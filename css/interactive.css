@@ -1,0 +1,33 @@
+/* interactive.css — animations and small UI helpers */
+
+.fadein {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: kcFadeIn 360ms ease forwards;
+}
+
+@keyframes kcFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* small theme toggle subtle styling */
+#themeToggle {
+  padding: 8px 10px;
+  font-size: 0.9rem;
+}
+
+/* focus visible for accessibility */
+:focus {
+  outline: 3px solid rgba(231,138,138,0.18);
+  outline-offset: 2px;
+}
+
+/* mobile layout tweaks for header actions */
+@media (max-width: 640px) {
+  .header-inner { flex-direction: column; gap: 12px; align-items: flex-start; }
+  .actions { width: 100%; justify-content: flex-start; }
+  .btn.primary { padding-left: 12px; padding-right: 12px; }
+}
