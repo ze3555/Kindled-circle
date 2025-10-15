@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Embers — Guides & Community</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <h1>Embers</h1>
+      <p class="tag">Guides • Polls • Community</p>
+    </div>
+    <nav class="top-controls">
+      <a class="btn" href="https://discord.gg/8exFEk2tj" target="_blank" rel="noopener">Join Discord</a>
+      <button id="clear-storage" class="btn ghost">Clear local data</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card" id="poll">
+      <h2>Community poll</h2>
+      <p class="muted">Do you want a website for guides and games?</p>
+      <div id="poll-options" class="poll-list"></div>
+      <div class="poll-foot">
+        <span id="poll-total">0 votes</span>
+        <button id="reset-poll" class="btn ghost">Reset poll</button>
+      </div>
+    </section>
+
+    <section class="card" id="guides">
+      <h2>Guides</h2>
+      <div id="guides-list" class="guides-list"></div>
+
+      <h3>Add a guide</h3>
+      <form id="guide-form" class="guide-form">
+        <input name="title" placeholder="Title" required />
+        <textarea name="content" rows="4" placeholder="Short description or guide text" required></textarea>
+        <input name="author" placeholder="Author (nickname)" />
+        <div class="form-row">
+          <button type="submit" class="btn">Add guide</button>
+          <button type="button" id="import-sample" class="btn ghost">Add sample guide</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card" id="about">
+      <h2>About</h2>
+      <p class="muted">This is a lightweight community hub prototype. Data is stored locally in your browser. For persistent storage and auth, we can add a backend (Supabase / Firebase / Node + DB) and Discord OAuth later.</p>
+      <ul class="roadmap">
+        <li>Server-side storage & authentication</li>
+        <li>Discord login and webhooks</li>
+        <li>Moderation tools and search</li>
+        <li>Mobile improvements and theming</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>Built for Embers community • Minimal prototype</small>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
