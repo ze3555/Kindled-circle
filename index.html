@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Kindled Circle</title>
-  <meta name="description" content="Guides, polls and community — minimal landing." />
+  <title>Kindled Circle — Embers</title>
+  <meta name="description" content="Kindled Circle — guides, quick polls and community tools. Minimal landing." />
+  <!-- Core styles -->
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/interactive.css" />
 </head>
 <body>
   <header>
@@ -16,7 +18,8 @@
         <p class="subtitle">Guides · Polls · Community</p>
       </div>
 
-      <div class="actions">
+      <div class="actions" role="navigation" aria-label="Main actions">
+        <button id="themeToggle" class="btn ghost" aria-pressed="false" aria-label="Toggle theme">Theme</button>
         <a class="btn primary" href="https://discord.gg/8exFEk2tj" target="_blank" rel="noopener">Join Discord</a>
         <button id="clearLocal" class="btn ghost">Clear local data</button>
       </div>
@@ -24,31 +27,35 @@
   </header>
 
   <main>
-    <section id="hero" class="card">
-      <h2>Welcome</h2>
+    <section id="hero" class="card fadein" aria-labelledby="hero-title">
+      <h2 id="hero-title">Welcome</h2>
       <p>Clean space for guides, quick polls and community tools. Minimal, fast, and dark.</p>
     </section>
 
-    <section id="guides" class="card">
-      <h3>Guides</h3>
-      <div id="guidesList" class="placeholder">No guides yet. Add the first one.</div>
+    <section id="guides" class="card fadein" style="animation-delay:120ms" aria-labelledby="guides-title">
+      <h3 id="guides-title">Guides</h3>
+      <div id="guidesList" class="placeholder" role="list">
+        <p class="muted">No guides yet. Add the first one.</p>
+      </div>
       <div class="controls">
         <button id="addGuide" class="btn primary small">Add a guide</button>
       </div>
     </section>
 
-    <section id="polls" class="card hidden">
-      <!-- Polls intentionally removed (clean slate). Use this section later if you want server-driven polls. -->
+    <!-- Polls section intentionally inert on static build.
+         Removed any active poll UI to avoid embedding server logic. -->
+    <section id="polls" class="card hidden fadein" style="animation-delay:240ms" aria-hidden="true">
       <h3>Polls</h3>
       <p class="muted">Polls are disabled on this static build.</p>
     </section>
-
   </main>
 
   <footer>
     <small>© Kindled Circle — simple landing</small>
   </footer>
 
+  <!-- Scripts: theme must load before app so app can read current theme if needed -->
+  <script src="js/theme.js" defer></script>
   <script src="js/app.js" defer></script>
 </body>
 </html>
