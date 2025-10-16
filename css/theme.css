@@ -1,56 +1,42 @@
-/* theme.css — variables and small helpers */
+/* theme.css — variables and theme overrides (light/dark) */
 
 :root {
-  --accent: #e78a8a; /* primary button */
+  --accent: #e78a8a;
   --bg: #0f1012;
   --surface: rgba(255,255,255,0.02);
   --text: #e6e7ea;
   --muted: rgba(230,230,234,0.6);
+  --border: rgba(255,255,255,0.03);
 }
 
-/* simple responsive tweaks */
-@media (max-width: 640px) {
-  .header-inner { padding: 14px; }
-  main { margin: 18px auto; padding: 0 12px 64px; }
-  .brand h1 { font-size: 1.4rem; }
-}
-/* Темная тема по умолчанию */
-:root {
-  --bg: #0f0f12;
-  --text: #e8e8ee;
-  --accent: #e78a8a;
-  --muted: rgba(230,230,234,0.6);
-}
-
-/* Светлая тема */
+/* Light theme overrides */
 [data-theme="light"] {
-  --bg: #f5f5f7;
-  --text: #121214;
   --accent: #d85757;
-  --muted: rgba(30,30,30,0.6);
+  --bg: #f7f7f8;
+  --surface: rgba(0,0,0,0.03);
+  --text: #111114;
+  --muted: rgba(17,17,20,0.55);
+  --border: rgba(0,0,0,0.06);
 }
 
-/* Применение переменных */
+/* Apply variables globally */
 html, body {
-  background-color: var(--bg);
+  background: var(--bg);
   color: var(--text);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-.embers-title::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  background: radial-gradient(circle, rgba(255,80,20,0.15) 0%, transparent 70%);
-  filter: blur(20px);
-  opacity: 0.6;
-  animation: emberPulse 6s infinite ease-in-out;
 }
 
-@keyframes emberPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.6; }
+/* subtle global transition for theme switching */
+html, body, .card {
+  transition: background-color 260ms ease, color 260ms ease, box-shadow 260ms ease;
+}
+
+/* links */
+a { color: var(--accent); text-decoration: none; }
+a:hover { opacity: 0.9; }
+
+/* small helpers for contrast on light theme */
+[data-theme="light"] .card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
