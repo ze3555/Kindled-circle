@@ -23,99 +23,80 @@
   outline-offset: 2px;
 }
 
-/* === Embers title — cross-browser, readable on dark & light themes === */
+/* === Embers title — final readable glowing version === */
 .embers-title {
   position: relative;
   display: inline-block;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: "Cinzel", serif;
   font-weight: 700;
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   letter-spacing: 1.4px;
   line-height: 1;
 
-  /* gradient text */
-  background: linear-gradient(120deg, #ffb07a 0%, #ff5b3a 50%, #ffb07a 100%);
-  -webkit-background-clip: text;  /* Safari / iOS */
+  background: linear-gradient(120deg, #ffb680 0%, #ff6633 40%, #ffb680 100%);
+  -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent; /* IMPORTANT for Safari */
+  -webkit-text-fill-color: transparent; /* must for Safari */
   color: transparent;
 
-  /* subtle breathing */
-  animation: emberGlow 5s ease-in-out infinite alternate;
-  /* thin edge + soft halo for contrast */
+  animation: emberGlow 6s ease-in-out infinite alternate;
   text-shadow:
-    0 1px 0 rgba(0,0,0,0.75),       /* dark edge for contrast */
-    0 6px 18px rgba(255,90,50,0.04); /* warm halo — very subtle */
+    0 1px 2px rgba(0,0,0,0.9),
+    0 0 10px rgba(255,100,40,0.25),
+    0 0 22px rgba(255,70,20,0.15);
 }
 
-/* per-letter flicker — optional; if you used plain <h1>, it's safe (spans optional) */
-.embers-title span { 
-  display: inline-block;
-  animation: emberFlicker 2200ms infinite ease-in-out;
-  will-change: opacity, transform;
+/* dark theme fix — brighten and add outer halo */
+[data-theme="dark"] .embers-title {
+  background: linear-gradient(120deg, #ffddb0 0%, #ff7b42 45%, #ffddb0 100%);
+  text-shadow:
+    0 1px 3px rgba(0,0,0,0.9),
+    0 0 12px rgba(255,120,60,0.4),
+    0 0 26px rgba(255,100,40,0.25);
 }
-.embers-title span:nth-child(2) { animation-delay: 0.12s; }
-.embers-title span:nth-child(3) { animation-delay: 0.24s; }
-.embers-title span:nth-child(4) { animation-delay: 0.36s; }
-.embers-title span:nth-child(5) { animation-delay: 0.48s; }
-.embers-title span:nth-child(6) { animation-delay: 0.60s; }
 
 @keyframes emberGlow {
-  0%   { filter: brightness(0.92); transform: translateY(0); }
-  50%  { filter: brightness(1.08); transform: translateY(-0.9px); }
-  100% { filter: brightness(0.96); transform: translateY(0); }
+  0%   { filter: brightness(0.9); transform: translateY(0); }
+  50%  { filter: brightness(1.15); transform: translateY(-1px); }
+  100% { filter: brightness(0.95); transform: translateY(0); }
 }
+
+/* optional gentle shimmer per letter */
+.embers-title span {
+  display: inline-block;
+  animation: emberFlicker 2400ms infinite ease-in-out;
+}
+.embers-title span:nth-child(2){animation-delay:0.12s;}
+.embers-title span:nth-child(3){animation-delay:0.24s;}
+.embers-title span:nth-child(4){animation-delay:0.36s;}
+.embers-title span:nth-child(5){animation-delay:0.48s;}
+.embers-title span:nth-child(6){animation-delay:0.6s;}
 
 @keyframes emberFlicker {
-  0%   { opacity: 1; transform: translateY(0); }
-  12%  { opacity: 0.86; transform: translateY(-0.6px); }
-  30%  { opacity: 0.66; transform: translateY(0.6px); }
-  60%  { opacity: 0.92; transform: translateY(0); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {opacity:1; transform:translateY(0);}
+  10% {opacity:0.85; transform:translateY(-0.5px);}
+  25% {opacity:0.7; transform:translateY(0.5px);}
+  60% {opacity:0.95;}
+  100% {opacity:1; transform:translateY(0);}
 }
 
-/* refined halo behind title — much weaker so it doesn't wash text out */
+/* soft halo behind title */
 .embers-title::after {
   content: "";
   position: absolute;
-  inset: -3px -6px 0 -6px;
+  inset: -4px -6px 0 -6px;
   pointer-events: none;
-  background: radial-gradient(closest-side,
-              rgba(255,90,50,0.055),
-              rgba(255,60,30,0.008) 55%,
+  background: radial-gradient(circle at center,
+              rgba(255,100,50,0.08) 0%,
+              rgba(255,80,30,0.02) 50%,
               transparent 70%);
-  filter: blur(6px);
-  opacity: 0.12;
+  filter: blur(8px);
+  opacity: 0.18;
   z-index: -1;
-  transition: opacity 200ms ease;
 }
 
-/* Theme-specific boosts:
-   - In dark theme increase thin light overlay so letters pop more
-   - In light theme keep halo subtle */
-[data-theme="dark"] .embers-title {
-  /* keep gradient but add slightly brighter halo and a very thin light outline */
-  text-shadow:
-    0 1px 0 rgba(0,0,0,0.78),
-    0 8px 20px rgba(255,90,50,0.05);
-}
-[data-theme="dark"] .embers-title::after {
-  opacity: 0.16;
-  filter: blur(7px);
-}
-
-/* On very small screens reduce blur & animation so text remains crisp */
-@media (max-width: 520px) {
-  .embers-title { font-size: 1.6rem; }
-  .embers-title::after { filter: blur(5px); opacity: 0.08; }
-  .embers-title span { animation-duration: 2000ms; }
-}
-
-/* Fallback: if background-clip not supported, ensure readable fallback color */
-@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
-  .embers-title {
-    color: var(--accent, #e78a8a); /* fallback solid color */
-    -webkit-text-fill-color: initial;
-    text-shadow: 0 1px 0 rgba(0,0,0,0.8);
-  }
+/* smaller screens */
+@media (max-width: 640px) {
+  .embers-title { font-size: 1.8rem; }
+  .embers-title::after { filter: blur(6px); opacity: 0.1; }
 }
