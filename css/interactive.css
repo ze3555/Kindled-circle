@@ -31,3 +31,44 @@
   .actions { width: 100%; justify-content: flex-start; }
   .btn.primary { padding-left: 12px; padding-right: 12px; }
 }
+/* === Ember Title Animation === */
+.embers-title {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 2.6rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  background: linear-gradient(120deg, #ff9966, #ff3300, #ff9966);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: emberGlow 5s ease-in-out infinite alternate;
+  text-shadow:
+    0 0 6px rgba(255, 110, 50, 0.5),
+    0 0 20px rgba(255, 50, 20, 0.3);
+}
+
+.embers-title span {
+  display: inline-block;
+  animation: emberFlicker 3s infinite ease-in-out;
+}
+
+/* Each letter flickers at slightly different times */
+.embers-title span:nth-child(2) { animation-delay: 0.3s; }
+.embers-title span:nth-child(3) { animation-delay: 0.6s; }
+.embers-title span:nth-child(4) { animation-delay: 0.9s; }
+.embers-title span:nth-child(5) { animation-delay: 1.2s; }
+.embers-title span:nth-child(6) { animation-delay: 1.5s; }
+
+@keyframes emberGlow {
+  0% { filter: brightness(0.8); }
+  50% { filter: brightness(1.2); }
+  100% { filter: brightness(0.9); }
+}
+
+@keyframes emberFlicker {
+  0%, 100% { opacity: 1; transform: translateY(0px); }
+  10% { opacity: 0.8; transform: translateY(-0.5px); }
+  20% { opacity: 0.6; transform: translateY(0.5px); }
+  30% { opacity: 1; }
+  80% { opacity: 0.9; }
+}
