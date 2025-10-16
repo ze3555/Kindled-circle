@@ -1,121 +1,57 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Kindled Circle — Embers</title>
-  <meta name="description" content="Kindled Circle — guides, quick tools and community." />
+  <title>Embers — Kindled Circle</title>
+  <meta name="description" content="Embers — guides, stories, moments." />
 
-  <!-- Styles -->
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/interactive.css" />
 </head>
 <body>
-  <!-- ========== HEADER: Embers + quicknav + actions ========== -->
+  <!-- HEADER: Embers + quicknav + Discord button (only) -->
   <header>
     <div class="header-inner" style="align-items:center;">
       <div style="display:flex; align-items:center; gap:16px;">
-        <!-- Brand + quick nav (buttons next to Embers) -->
-        <div class="brand" style="display:flex; align-items:center; gap:12px;">
-          <h1 class="embers-title" style="margin:0;">Embers</h1>
+        <h1 class="embers-title" style="margin:0;">Embers</h1>
 
-          <!-- ТУТ: кнопки секций (рядом с надписью) -->
-          <nav class="quicknav" aria-label="Quick navigation">
-            <a href="#welcome" class="navlink">Welcome</a>
-            <a href="#tools" class="navlink">Tools</a>
-            <a href="#guides" class="navlink">Guides</a>
-          </nav>
-        </div>
-
-        <!-- subtle subtitle -->
-        <div style="display:flex; flex-direction:column; margin-left:12px;">
-          <p class="subtitle" style="margin:0;font-size:0.9rem;color:var(--muted)">Guides · Polls · Community</p>
-        </div>
+        <!-- BUTTONS NEXT TO EMBERS -->
+        <nav class="quicknav" aria-label="Quick navigation" style="margin-left:12px;">
+          <a href="#guides"  class="navlink">Guides</a>
+          <a href="#stories" class="navlink">Stories</a>
+          <a href="#moments" class="navlink">Moments</a>
+        </nav>
       </div>
 
-      <!-- Right side actions (theme + discord) -->
+      <!-- RIGHT SIDE: only Discord -->
       <div class="actions" style="margin-left:auto; display:flex; gap:10px; align-items:center;">
-        <button id="themeToggle" class="btn small" aria-pressed="false">Dark</button>
-
-        <a id="discordBtn" class="btn discord" href="https://discord.gg/8exFEk2tj" target="_blank" rel="noopener" role="button" aria-label="Join our Discord">
+        <a id="discordBtn" class="btn discord" href="https://discord.gg/8exFEk2tj" target="_blank" rel="noopener" aria-label="Join our Discord">
           <svg class="discord-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path fill="currentColor" d="M20 4.267A18.1 18.1 0 0 0 16.8 3.2 13.2 13.2 0 0 0 15.7 2.9c-.2.3-.5.6-.7.9-2.1-.3-4.3-.3-6.4 0-.2-.3-.5-.6-.7-.9-.7.2-1.6.5-2.9 1.2A18.1 18.1 0 0 0 4 8.973c-1 2.3-1.1 4.5-.9 6.6 2.1 1.6 4.1 2.6 6 3.3 1 .3 2 .5 3.1.6 1.1 0 2.1 0 3.1-.1 1.9-.4 3.9-1.1 6-3.3.2-2.2.1-4.4-.9-6.6zM9.7 14.9c-.9 0-1.6-.8-1.6-1.7 0-.9.7-1.6 1.6-1.6.9 0 1.6.7 1.6 1.6 0 1-.7 1.7-1.6 1.7zm4.6 0c-.9 0-1.6-.8-1.6-1.7 0-.9.7-1.6 1.6-1.6.9 0 1.6.7 1.6 1.6 0 1-.7 1.7-1.6 1.7z"/>
           </svg>
           <span class="discord-label">Join Discord</span>
-          <span class="discord-tip" aria-hidden="true">Join the circle</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- ========== MAIN ========== -->
+  <!-- EMPTY MAIN: мы упрятали весь контент, лишь якоря для кнопок -->
   <main>
-    <!-- Welcome -->
-    <section id="welcome" class="card fadein" aria-labelledby="hero-title">
-      <h2 id="hero-title">Welcome</h2>
-      <p>Clean space for guides, quick polls and community tools. Minimal, fast, and dark.</p>
-    </section>
-
-    <!-- Tools -->
-    <section id="tools" class="card fadein" aria-labelledby="tools-title">
-      <h2 id="tools-title">Tools</h2>
-      <div class="tool-grid">
-        <a href="#guides" class="tool-card" id="guideTool">
-          <div class="icon" aria-hidden="true">📜</div>
-          <div class="text">
-            <h3>Guides</h3>
-            <p>Create and share quick references</p>
-          </div>
-        </a>
-
-        <a href="#polls" class="tool-card" id="pollTool">
-          <div class="icon" aria-hidden="true">🗳️</div>
-          <div class="text">
-            <h3>Polls</h3>
-            <p>Ask the circle, get instant votes</p>
-          </div>
-        </a>
-
-        <a href="#notes" class="tool-card" id="notesTool">
-          <div class="icon" aria-hidden="true">🕯️</div>
-          <div class="text">
-            <h3>Notes</h3>
-            <p>Keep quick thoughts and ideas</p>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Guides -->
-    <section id="guides" class="card fadein" aria-labelledby="guides-title">
-      <h2 id="guides-title">Guides</h2>
-      <div id="guidesList" class="placeholder">No guides yet. Add the first one.</div>
-      <div class="controls">
-        <button id="addGuide" class="btn primary small">Add a guide</button>
-      </div>
-    </section>
-
-    <!-- Polls (inert for now) -->
-    <section id="polls" class="card hidden fadein" aria-hidden="true">
-      <h3>Polls</h3>
-      <p class="muted">Polls are disabled on this static build.</p>
-    </section>
-
-    <!-- Notes placeholder -->
-    <section id="notes" class="card hidden fadein" aria-hidden="true">
-      <h3>Notes</h3>
-      <p class="muted">Notes tool not enabled yet.</p>
-    </section>
+    <!-- placeholders (invisible): anchors for nav links, can be filled later -->
+    <div id="guides" style="height:1px;overflow:hidden;"></div>
+    <div id="stories" style="height:1px;overflow:hidden;"></div>
+    <div id="moments" style="height:1px;overflow:hidden;"></div>
   </main>
 
-  <footer>
-    <small>© Kindled Circle — embers speak</small>
+  <!-- FOOTER: маленькая сдержанная подпись -->
+  <footer style="text-align:center;padding:12px 0;font-size:0.85rem;color:var(--muted);">
+    © Kindled Circle — embers speak
   </footer>
 
-  <!-- Scripts: theme before app, then helpers -->
+  <!-- SCRIPTS: подключаем только полезные -->
   <script src="js/theme.js" defer></script>
-  <script src="js/app.js" defer></script>
   <script src="js/discord.js" defer></script>
   <script src="js/nav.js" defer></script>
 </body>
