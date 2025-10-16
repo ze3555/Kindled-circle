@@ -14,3 +14,25 @@
   main { margin: 18px auto; padding: 0 12px 64px; }
   .brand h1 { font-size: 1.4rem; }
 }
+/* Темная тема по умолчанию */
+:root {
+  --bg: #0f0f12;
+  --text: #e8e8ee;
+  --accent: #e78a8a;
+  --muted: rgba(230,230,234,0.6);
+}
+
+/* Светлая тема */
+[data-theme="light"] {
+  --bg: #f5f5f7;
+  --text: #121214;
+  --accent: #d85757;
+  --muted: rgba(30,30,30,0.6);
+}
+
+/* Применение переменных */
+html, body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
