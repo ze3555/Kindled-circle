@@ -1,58 +1,73 @@
-// theme.js — toggles data-theme on <html> and persists choice
+// js/theme.js — robust theme toggle with safe DOM access and logs
 (function () {
   const KEY = 'kc_theme_v1';
-  const btn = document.getElementById('themeToggle');
   const root = document.documentElement;
 
-  function getStored() {
-    try {
-      return localStorage.getItem(KEY);
-    } catch (e) { return null; }
+  function safeGet(key) {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
   }
-
-  function store(val) {
-    try { localStorage.setItem(KEY, val); } catch (e) {}
+  function safeSet(key, val) {
+    try { localStorage.setItem(key, val); } catch (e) {}
   }
 
   function applyTheme(name) {
     if (name === 'light') {
       root.setAttribute('data-theme', 'light');
+      console.info('[theme] applied light');
     } else {
       root.removeAttribute('data-theme');
+      console.info('[theme] applied dark');
     }
   }
 
-  function init() {
-    const stored = getStored();
-    if (stored) {
+  function initTheme() {
+    const stored = safeGet(KEY);
+    if (stored === 'light' || stored === 'dark') {
       applyTheme(stored);
     } else {
       const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-      applyTheme(prefersLight ? 'light' : 'dark');
-      store(prefersLight ? 'light' : 'dark');
+      const initial = prefersLight ? 'light' : 'dark';
+      applyTheme(initial);
+      safeSet(KEY, initial);
+    }
+  }
+
+  function initButton() {
+    const button = document.getElementById('themeToggle');
+    if (!button) {
+      console.warn('[theme] themeToggle button not found in DOM');
+      return;
     }
 
-    if (btn) {
-      btn.addEventListener('click', () => {
-        const current = getStored() === 'light' ? 'light' : 'dark';
-        const next = current === 'light' ? 'dark' : 'light';
-        applyTheme(next);
-        store(next);
-        btn.setAttribute('aria-pressed', next === 'light' ? 'true' : 'false');
-        btn.textContent = next === 'light' ? 'Light' : 'Dark';
-      });
+    // initial label according to storage
+    const currentLabel = safeGet(KEY) === 'light' ? 'Light' : 'Dark';
+    button.textContent = currentLabel;
+    button.setAttribute('aria-pressed', currentLabel === 'Light' ? 'true' : 'false');
 
-      const label = getStored() === 'light' ? 'Light' : 'Dark';
-      btn.textContent = label;
-      btn.setAttribute('aria-pressed', label === 'Light' ? 'true' : 'false');
+    button.addEventListener('click', () => {
+      const now = safeGet(KEY) === 'light' ? 'light' : 'dark';
+      const next = now === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+      safeSet(KEY, next);
+      button.textContent = next === 'light' ? 'Light' : 'Dark';
+      button.setAttribute('aria-pressed', next === 'light' ? 'true' : 'false');
+      console.log('[theme] toggled to', next);
+    });
+  }
+
+  function ready() {
+    try {
+      initTheme();
+      initButton();
+      console.log('[theme] initialized, current:', safeGet(KEY));
+    } catch (err) {
+      console.error('[theme] failed to init', err);
     }
-
-    console.log('Theme initialized:', getStored());
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', ready);
   } else {
-    init();
+    ready();
   }
 })();
