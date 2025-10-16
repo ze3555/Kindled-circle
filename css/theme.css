@@ -36,3 +36,21 @@ html, body {
   color: var(--text);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+.embers-title::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255,80,20,0.15) 0%, transparent 70%);
+  filter: blur(20px);
+  opacity: 0.6;
+  animation: emberPulse 6s infinite ease-in-out;
+}
+
+@keyframes emberPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
