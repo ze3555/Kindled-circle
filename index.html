@@ -12,26 +12,30 @@
   <link rel="stylesheet" href="css/interactive.css" />
 </head>
 <body>
+  <!-- ========== HEADER: Embers + quicknav + actions ========== -->
   <header>
-    <div class="header-inner" style="align-items:flex-start;">
+    <div class="header-inner" style="align-items:center;">
       <div style="display:flex; align-items:center; gap:16px;">
-        <div class="brand" style="display:flex; flex-direction:column; gap:6px;">
-          <div style="display:flex; align-items:center; gap:12px;">
-            <h1 class="embers-title" style="margin:0;">Embers</h1>
+        <!-- Brand + quick nav (buttons next to Embers) -->
+        <div class="brand" style="display:flex; align-items:center; gap:12px;">
+          <h1 class="embers-title" style="margin:0;">Embers</h1>
 
-            <!-- quicknav placed directly next to title -->
-            <nav class="quicknav" aria-label="Quick navigation">
-              <a href="#welcome" class="navlink">Welcome</a>
-              <a href="#tools" class="navlink">Tools</a>
-              <a href="#guides" class="navlink">Guides</a>
-            </nav>
-          </div>
+          <!-- ТУТ: кнопки секций (рядом с надписью) -->
+          <nav class="quicknav" aria-label="Quick navigation">
+            <a href="#welcome" class="navlink">Welcome</a>
+            <a href="#tools" class="navlink">Tools</a>
+            <a href="#guides" class="navlink">Guides</a>
+          </nav>
+        </div>
 
-          <p class="subtitle" style="margin:0;">Guides · Polls · Community</p>
+        <!-- subtle subtitle -->
+        <div style="display:flex; flex-direction:column; margin-left:12px;">
+          <p class="subtitle" style="margin:0;font-size:0.9rem;color:var(--muted)">Guides · Polls · Community</p>
         </div>
       </div>
 
-      <div class="actions" style="margin-left:auto;">
+      <!-- Right side actions (theme + discord) -->
+      <div class="actions" style="margin-left:auto; display:flex; gap:10px; align-items:center;">
         <button id="themeToggle" class="btn small" aria-pressed="false">Dark</button>
 
         <a id="discordBtn" class="btn discord" href="https://discord.gg/8exFEk2tj" target="_blank" rel="noopener" role="button" aria-label="Join our Discord">
@@ -45,6 +49,7 @@
     </div>
   </header>
 
+  <!-- ========== MAIN ========== -->
   <main>
     <!-- Welcome -->
     <section id="welcome" class="card fadein" aria-labelledby="hero-title">
@@ -57,7 +62,7 @@
       <h2 id="tools-title">Tools</h2>
       <div class="tool-grid">
         <a href="#guides" class="tool-card" id="guideTool">
-          <div class="icon">📜</div>
+          <div class="icon" aria-hidden="true">📜</div>
           <div class="text">
             <h3>Guides</h3>
             <p>Create and share quick references</p>
@@ -65,7 +70,7 @@
         </a>
 
         <a href="#polls" class="tool-card" id="pollTool">
-          <div class="icon">🗳️</div>
+          <div class="icon" aria-hidden="true">🗳️</div>
           <div class="text">
             <h3>Polls</h3>
             <p>Ask the circle, get instant votes</p>
@@ -73,7 +78,7 @@
         </a>
 
         <a href="#notes" class="tool-card" id="notesTool">
-          <div class="icon">🕯️</div>
+          <div class="icon" aria-hidden="true">🕯️</div>
           <div class="text">
             <h3>Notes</h3>
             <p>Keep quick thoughts and ideas</p>
@@ -108,7 +113,7 @@
     <small>© Kindled Circle — embers speak</small>
   </footer>
 
-  <!-- Scripts: theme before app, app before helpers -->
+  <!-- Scripts: theme before app, then helpers -->
   <script src="js/theme.js" defer></script>
   <script src="js/app.js" defer></script>
   <script src="js/discord.js" defer></script>
